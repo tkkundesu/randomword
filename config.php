@@ -5,5 +5,4 @@ define('DSN','mysql:host=localhost;dbname=list;charset=utf8');
 define('DB_USERNAME','dbuser');
 define('DB_PASSWORD','BtFEpSSvdhRTTwCx');
 
-require_once(__DIR__.'/function.php');
 ?>
