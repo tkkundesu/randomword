@@ -1,6 +1,6 @@
 drop database if exists heroku_20a8da0826c37ac;
 create database heroku_20a8da0826c37ac default character set utf8 collate utf8_general_ci;
-grant all on list.* to 'b32baaefe5fd4d'@'us-cdbr-iron-east-02.cleardb.net' identified by '70c23554';
+grant all on heroku_20a8da0826c37ac.* to 'b32baaefe5fd4d'@'us-cdbr-iron-east-02.cleardb.net' identified by '70c23554';
 use heroku_20a8da0826c37ac;
 
 
