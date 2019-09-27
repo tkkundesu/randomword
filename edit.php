@@ -3,31 +3,31 @@
 require_once(__DIR__.'/config.php');
 
 try{
-	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);
+	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);//データベースへ接続
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     
    
 
  }catch(PDOException $e){
-     echo $e->getmessage();
+     echo $e->getmessage();//例外表示
      exit;
  }   
 if(isset($_REQUEST['command'])){
 	switch ($_REQUEST['command']) {
 		case 'update':
-		if(empty($_REQUEST["kind"]))	
+		if(empty($_REQUEST["kind"]))//空の場合ブレイク	
 	    break;
-		$sql=$db->prepare('update subject set kind=? where id=?');
+		$sql=$db->prepare('update subject set kind=? where id=?');//subjectテーブルの情報のアップデート
         $sql->execute([$_REQUEST['kind'],$_REQUEST['id']]);
 	    break;
         case 'insert':
-        if(empty($_REQUEST["kind"]))    
+        if(empty($_REQUEST["kind"]))//空の場合ブレイク    
         break;
-        $sql=$db->prepare('insert into subject values(null,?,?)');
+        $sql=$db->prepare('insert into subject values(null,?,?)');//subjectテーブルの情報の挿入
         $sql->execute([$_SESSION['customer']['id'],$_REQUEST['kind']]);
         break;
         case 'delete':
-        $sql=$db->prepare('delete from subject where id=?');
+        $sql=$db->prepare('delete from subject where id=?');//subjectテーブルの情報の削除
         $sql->execute([$_REQUEST['id']]);
         break;
 	}
@@ -52,7 +52,7 @@ if(isset($_REQUEST['command'])){
 	<p><a href="logout.php">ログアウト</a></p>
     <?php
     if(isset($_SESSION['customer'])){
-        echo '<p>ようこそ<span class="user-name">'.$_SESSION['customer']['name'].'</span>さん。</p>';
+        echo '<p>ようこそ<span class="user-name">'.$_SESSION['customer']['name'].'</span>さん。</p>';//ログイン状態では顧客名表示
     }else{
         echo '<p>ようこそゲストさん。</p>';
     }?>
@@ -62,23 +62,23 @@ if(isset($_REQUEST['command'])){
     <div class="edit">
  	<?php
  	if(!isset($_SESSION["customer"])){
-     	echo '<p class="kind">ログインが必要です！</p>';
+     	echo '<p class="kind">ログインが必要です！</p>';//ログアウト状態では非表示
      	
     }else{
     	
-     	$sql=$db->prepare('select * from subject where customer_id =?');
+     	$sql=$db->prepare('select * from subject where customer_id =?');//顧客ＩＤと紐付けされているsubjectテーブルの情報を取り出す
         $sql->execute([$_SESSION['customer']['id']]);
      	
   
      foreach ($sql as $row){
      
-     	 echo '<form action="edit.php" method="post">';
+     	 echo '<form action="edit.php" method="post">';//更新処理のフォーム
          echo '<input type="hidden" name="command" value="update">';
          echo '<input type="hidden" name="id" value="'.$row['id'].'">';
          echo '<input type="text" name="kind" value="'.$row['kind'].'">';
          echo '<input type="submit" value="更新">';
          echo '</form>';
-         echo '<form action="edit.php" method="post">';
+         echo '<form action="edit.php" method="post">';//削除処理のフォーム
          echo '<input type="hidden" name="command" value="delete">';
          echo '<input type="hidden" name="id" value="'.$row['id'].'">';
          echo '<input type="submit" value="削除">';
@@ -87,7 +87,7 @@ if(isset($_REQUEST['command'])){
     
      }
      
-     	echo '<form action="edit.php" method="post">';
+     	echo '<form action="edit.php" method="post">';//追加処理のフォーム
      	echo '<input type="hidden" name="command" value="insert">';
      	echo '<input type="text" name="kind">';
      	echo '<input type="submit" value="追加">';
