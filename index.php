@@ -21,7 +21,7 @@ require_once(__DIR__.'/config.php');
 	<p><a href="logout.php">ログアウト</a></p>
 	<?php
 	if(isset($_SESSION['customer'])){
-		echo '<p>ようこそ<span class="user-name">'.$_SESSION['customer']['name'].'</span>さん。</p>';
+		echo '<p>ようこそ<span class="user-name">'.$_SESSION['customer']['name'].'</span>さん。</p>';//ログイン状態では顧客名表示
 	}else{
 		echo '<p>ようこそゲストさん。</p>';
 	}?>
