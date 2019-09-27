@@ -3,26 +3,26 @@
 require_once(__DIR__.'/config.php');
 
 try{
-	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);
+	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);//データベース接続
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     
    
 
  }catch(PDOException $e){
-     echo $e->getmessage();
+     echo $e->getmessage();//例外表示
      exit;
  } 
    if($_SERVER['REQUEST_METHOD']==='POST'){
-   	unset($_SESSION["customer"]);
-   	$sql=$db->prepare('select * from customer where login=? and password=?');
+   	unset($_SESSION["customer"]);//セッション情報をアンセット
+   	$sql=$db->prepare('select * from customer where login=? and password=?');//入力された情報から顧客データをデータベースから呼び出す
    	$sql->execute([$_REQUEST["login"],$_REQUEST["password"]]);
    	foreach ($sql as $row) {
-   		$_SESSION["customer"]=[
+   		$_SESSION["customer"]=[//セッションへ情報を格納
         'id'=>$row["id"],'name'=>$row["name"],'login'=>$row["login"],'password'=>$row["password"]
    		];
    	}
    if(isset($_SESSION["customer"])){
-   	header('Location:index.php');exit();
+   	header('Location:index.php');exit();//ログイン状態になったらインデックスへリダイレクト
    	}else{
     echo '<script>alert("ログイン名またはパスワードが違います。");</script>';
    }
