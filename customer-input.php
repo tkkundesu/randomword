@@ -24,6 +24,7 @@ if(isset($_SESSION['customer'])){//ログイン状態の時は各変数へセッ
 </div>
  </header>
  <main>
+	 <!--新規登録画面-->
   <div class="edit">
   <h2>新規登録</h2>
  	<form action="customer-output.php" method="post">
