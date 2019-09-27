@@ -3,13 +3,13 @@
 require_once(__DIR__.'/config.php');
 
 try{
-	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);
+	$db=new PDO(DSN,DB_USERNAME,DB_PASSWORD);//データベースへ接続
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     
    
 
  }catch(PDOException $e){
-     echo $e->getmessage();
+     echo $e->getmessage();//例外表示
      exit;
  }   
 ?>
@@ -36,10 +36,11 @@ try{
     <div class="container">
  	<?php
      if(!isset($_SESSION["customer"])){
-     	echo '<p class="lhome">ログインが必要です！</p>';
+     	echo '<p class="lhome">ログインが必要です！</p>';//ログイン状態でない場合の画面
      	echo '<p><a href="index.php" class="rhome">ホーム</a></p>';
      }else{
      	$sql=$db->prepare('select * from subject where customer_id =? ORDER BY rand() LIMIT 1');
+　　　　　//顧客ＩＤと紐付けされているsubjectテーブルのkindカラムから1つランダムで抽出
      	$sql->execute([$_SESSION['customer']['id']]);
      	foreach ($sql as $row) {
      		echo '<p class="kind">'.$row['kind'].'</p>';
