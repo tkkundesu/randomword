@@ -4,15 +4,12 @@ require_once(__DIR__.'/config.php');
 
   
    if(isset($_SESSION["customer"])){
-    unset($_SESSION['customer']);
+    unset($_SESSION['customer']);//セッション情報アンセットによりログアウト状態にする
     echo '<script>alert("ログアウトしました。");</script>';
-   	// header('Location:index.php');
-
-    // exit();
+   
    	}else{
     echo '<script>alert("すでにログアウトされてます。");</script>';
-    // header('Location:index.php');
-    // exit();
+  
    }
     
 // ?>
