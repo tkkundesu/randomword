@@ -2,7 +2,7 @@
 
  <?php
 $name=$login=$password="";
-if(isset($_SESSION['customer'])){
+if(isset($_SESSION['customer'])){//ログイン状態の時は各変数へセッション情報を格納
   $name=$_SESSION['customer']['name'];
   $login=$_SESSION['customer']['login'];
   $password=$_SESSION['customer']['password'];
@@ -27,9 +27,9 @@ if(isset($_SESSION['customer'])){
   <div class="edit">
   <h2>新規登録</h2>
  	<form action="customer-output.php" method="post">
- 	<p class="form">お名前:<input type="text" name="name" value="<?php echo $name;?>"></p>
- 	<p class="form">ログイン名:<input type="text" name="login" value="<?php echo $login;?>"></p>
-  <p class="form">パスワード:<input type="password" name="password" value="<?php echo $password;?>"></p>
+ 	<p class="form">お名前:<input type="text" name="name" value="<?php echo $name;//ログイン状態ではセッション情報表示?>"></p>
+ 	<p class="form">ログイン名:<input type="text" name="login" value="<?php echo $login;//ログイン状態ではセッション情報表示?>"></p>
+  <p class="form">パスワード:<input type="password" name="password" value="<?php echo $password;//ログイン状態ではセッション情報表示?>"></p>
   <p><input type="submit" name="送信"></p>
  	</form>
  </div>
