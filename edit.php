@@ -47,7 +47,13 @@ if(isset($_REQUEST['command'])){
  <header>
     <div class="top">
 	<p><a href="edit.php">編集</a></p>
-	<p><a href="customer-input.php">新規登録</a></p>
+	  <p><a href="customer-input.php"><?php//ログイン状態では会員登録変更
+	   if(isset($_SESSION["customer"])){
+  　　　　　　　　　　echo '会員登録変更';
+　　　　　　　　}else{//ログインしていない時では新規登録
+  　　　　　　　　　　echo '新規登録';
+　　　　　　　　　}
+	  ?></a></p>
 	<p><a href="login.php">ログイン</a></p>
 	<p><a href="logout.php">ログアウト</a></p>
     <?php
