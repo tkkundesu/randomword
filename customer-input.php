@@ -24,9 +24,14 @@ if(isset($_SESSION['customer'])){//ログイン状態の時は各変数へセッ
 </div>
  </header>
  <main>
-	 <!--新規登録画面-->
-  <div class="edit">
-  <h2>新規登録</h2>
+<div class="edit">
+  <h2> <?php
+//ログイン状態では会員登録変更
+if(isset($_SESSION['customer'])){
+  echo '会員情報変更';
+  }else{//ログインしていない時では新規登録
+   echo '新規登録';
+			 }?></h2>
  	<form action="customer-output.php" method="post">
  	<p class="form">お名前:<input type="text" name="name" value="<?php echo $name;//ログイン状態ではセッション情報表示?>"></p>
  	<p class="form">ログイン名:<input type="text" name="login" value="<?php echo $login;//ログイン状態ではセッション情報表示?>"></p>
