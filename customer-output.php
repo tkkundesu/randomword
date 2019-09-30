@@ -51,6 +51,7 @@ if(empty($sql->fetch())){
  <header>
   <div class="top">
   <p><a href="edit.php">編集</a></p>
+ <p><a href="customer-input.php">
  <?php
 //ログイン状態では会員登録変更
 if(isset($_SESSION['customer'])){
